@@ -214,8 +214,8 @@ namespace SmartSkus.Api.Data.Repo
         public IEnumerable<Item> GetAllItems()
         {
             var temp = _context.Items
-                .Include(c => c.Category)
-                .Include(v => v.ItemVariations)
+                .Include(parent => parent.Category)
+                .Include(parent => parent.ItemVariations.OrderBy(child => child.ItemVariationID))
                 .ToList();
 
             return temp;
